@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 
 import pytest
 
@@ -10,6 +11,14 @@ from conventional_pre_commit.output import Colors
 @pytest.fixture
 def cmd():
     return "conventional-pre-commit"
+
+
+def test_main_fail__no_args_explicit_empty_list(conventional_commit_path, monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["conventional-pre-commit", conventional_commit_path])
+
+    result = main([])
+
+    assert result == RESULT_FAIL
 
 
 def test_main_fail__missing_args():
