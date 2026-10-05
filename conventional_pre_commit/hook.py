@@ -8,7 +8,7 @@ RESULT_SUCCESS = 0
 RESULT_FAIL = 1
 
 
-def main(argv=[]):
+def main(argv=None):
     parser = argparse.ArgumentParser(
         prog="conventional-pre-commit", description="Check a git commit message for Conventional Commits formatting."
     )
@@ -39,7 +39,7 @@ def main(argv=[]):
         help="Print more verbose error output.",
     )
 
-    if len(argv) < 1:
+    if argv is None:
         argv = sys.argv[1:]
 
     try:
